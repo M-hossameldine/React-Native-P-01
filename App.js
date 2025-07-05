@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    gap: 8,
     paddingBottom: 16,
     marginBottom: 16,
     borderBottomWidth: 1,
@@ -71,6 +70,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     width: "70%",
     padding: 8,
+    marginRight: 8,
   },
   // * The goalsOuterContainer is used to control the height of the ScrollView since the scrollable area is determined by the parent component
   goalsOuterContainer: {
