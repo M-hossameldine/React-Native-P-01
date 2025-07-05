@@ -32,9 +32,9 @@ export default function App() {
       </View>
       <View style={styles.goalsContainer}>
         {userGoals.map((goal, index) => (
-          <Text key={index} style={styles.goalItem}>
-            {goal}
-          </Text>
+          <View key={index} style={styles.goalItem}>
+            <Text>{goal}</Text>
+          </View>
         ))}
       </View>
     </View>
