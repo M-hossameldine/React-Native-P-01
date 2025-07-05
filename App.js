@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Button,
+  TextInput,
+} from "react-native";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -30,12 +37,14 @@ export default function App() {
         />
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
-      <View style={styles.goalsContainer}>
-        {userGoals.map((goal, index) => (
-          <View key={index} style={styles.goalItem}>
-            <Text style={styles.goalText}>{goal}</Text>
-          </View>
-        ))}
+      <View style={styles.goalsOuterContainer}>
+        <ScrollView>
+          {userGoals.map((goal, index) => (
+            <View key={index} style={styles.goalItem}>
+              <Text style={styles.goalText}>{goal}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
@@ -63,11 +72,12 @@ const styles = StyleSheet.create({
     width: "70%",
     padding: 8,
   },
-  goalsContainer: {
+  // * The goalsOuterContainer is used to control the height of the ScrollView since the scrollable area is determined by the parent component
+  goalsOuterContainer: {
     flex: 1,
-    gap: 8,
   },
   goalItem: {
+    marginBottom: 8,
     padding: 8,
     borderRadius: 6,
     backgroundColor: "#5e0acc",
