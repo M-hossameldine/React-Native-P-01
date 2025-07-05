@@ -20,6 +20,12 @@ export default function App() {
     });
   };
 
+  const deleteGoalHandler = (id) => {
+    setUserGoals((currentUserGoals) => {
+      return currentUserGoals.filter((goal) => goal.id !== id);
+    });
+  };
+
   return (
     <View style={styles.appContainer}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -27,7 +33,13 @@ export default function App() {
         <FlatList
           data={userGoals}
           renderItem={(itemData) => {
-            return <GoalItem text={itemData.item.text} />;
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                onDeleteGoal={deleteGoalHandler}
+                id={itemData.item.id}
+              />
+            );
           }}
           // * keyExtractor is used to identify the item to be rendered in the FlatList, in case of not providing the 'key' property in the data object
           keyExtractor={(item) => {
