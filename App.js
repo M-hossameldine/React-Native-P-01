@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
+  FlatList,
   Button,
   TextInput,
 } from "react-native";
@@ -22,7 +22,14 @@ export default function App() {
 
     setUserGoals((currentUserGoals) => {
       setEnteredGoalText("");
-      return [enteredGoalText, ...currentUserGoals];
+      return [
+        {
+          text: enteredGoalText,
+          key: Math.random().toString(), // * FlatList by default will use the key property to identify and render the items (if existed)
+          id: Math.random().toString(),
+        },
+        ...currentUserGoals,
+      ];
     });
   };
 
@@ -38,13 +45,20 @@ export default function App() {
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsOuterContainer}>
-        <ScrollView>
-          {userGoals.map((goal, index) => (
-            <View key={index} style={styles.goalItem}>
-              <Text style={styles.goalText}>{goal}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList
+          data={userGoals}
+          renderItem={(itemData) => {
+            return (
+              <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{itemData.item.text}</Text>
+              </View>
+            );
+          }}
+          // * keyExtractor is used to identify the item to be rendered in the FlatList, in case of not providing the 'key' property in the data object
+          keyExtractor={(item) => {
+            return item.id;
+          }}
+        />
       </View>
     </View>
   );
