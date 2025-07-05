@@ -1,12 +1,7 @@
 import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Button,
-  TextInput,
-} from "react-native";
+
+import { StyleSheet, View, FlatList, Button, TextInput } from "react-native";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -48,11 +43,7 @@ export default function App() {
         <FlatList
           data={userGoals}
           renderItem={(itemData) => {
-            return (
-              <View style={styles.goalItem}>
-                <Text style={styles.goalText}>{itemData.item.text}</Text>
-              </View>
-            );
+            return <GoalItem text={itemData.item.text} />;
           }}
           // * keyExtractor is used to identify the item to be rendered in the FlatList, in case of not providing the 'key' property in the data object
           keyExtractor={(item) => {
@@ -89,14 +80,5 @@ const styles = StyleSheet.create({
   // * The goalsOuterContainer is used to control the height of the ScrollView since the scrollable area is determined by the parent component
   goalsOuterContainer: {
     flex: 1,
-  },
-  goalItem: {
-    marginBottom: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: "#5e0acc",
-  },
-  goalText: {
-    color: "white",
   },
 });
