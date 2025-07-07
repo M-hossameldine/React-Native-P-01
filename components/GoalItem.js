@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#5e0acc",
   },
   pressedItem: {
-    opacity: 0.5, // * apply any styles for iOS platforms (ripple effect)
+    opacity: 0.5, // * apply any styles for iOS platform (ripple effect)
   },
   goalText: {
     padding: 8,
