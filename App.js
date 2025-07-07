@@ -1,11 +1,20 @@
 import { useState } from "react";
 
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Button } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
 export default function App() {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [userGoals, setUserGoals] = useState([]);
+
+  const startAddGoalHandler = () => {
+    setModalIsVisible(true);
+  };
+
+  const endAddGoalHandler = () => {
+    setModalIsVisible(false);
+  };
 
   const addGoalHandler = (enteredGoalText) => {
     setUserGoals((currentUserGoals) => {
@@ -18,6 +27,8 @@ export default function App() {
         ...currentUserGoals,
       ];
     });
+
+    endAddGoalHandler();
   };
 
   const deleteGoalHandler = (id) => {
@@ -28,7 +39,12 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title="Add New Goal" onPress={startAddGoalHandler} />
+      <GoalInput
+        visible={modalIsVisible}
+        onAddGoal={addGoalHandler}
+        onCancel={endAddGoalHandler}
+      />
       <View style={styles.goalsOuterContainer}>
         <FlatList
           data={userGoals}
@@ -60,5 +76,6 @@ const styles = StyleSheet.create({
   // * The goalsOuterContainer is used to control the height of the ScrollView since the scrollable area is determined by the parent component
   goalsOuterContainer: {
     flex: 1,
+    marginTop: 12,
   },
 });
