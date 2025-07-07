@@ -10,8 +10,9 @@ const GoalItem = (props) => {
   return (
     <View style={styles.goalItem}>
       <Pressable
-        android_ripple={{ color: "#210644" }}
+        android_ripple={{ color: "#210644" }} // * ripple effect for Android
         onPress={deleteGoalHandler}
+        style={({ pressed }) => pressed && styles.pressedItem} // * apply any styles for iOS platforms (ripple effect)
       >
         <Text style={styles.goalText}>{props.text}</Text>
       </Pressable>
@@ -24,6 +25,9 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderRadius: 6,
     backgroundColor: "#5e0acc",
+  },
+  pressedItem: {
+    opacity: 0.5, // * apply any styles for iOS platforms (ripple effect)
   },
   goalText: {
     padding: 8,
