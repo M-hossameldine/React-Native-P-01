@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { StyleSheet, View, FlatList, Button } from "react-native";
+import { StyleSheet, StatusBar, View, FlatList, Button } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
@@ -38,32 +38,40 @@ export default function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button title="Add New Goal" onPress={startAddGoalHandler} />
-      <GoalInput
-        visible={modalIsVisible}
-        onAddGoal={addGoalHandler}
-        onCancel={endAddGoalHandler}
-      />
-      <View style={styles.goalsOuterContainer}>
-        <FlatList
-          data={userGoals}
-          renderItem={(itemData) => {
-            return (
-              <GoalItem
-                text={itemData.item.text}
-                onDeleteGoal={deleteGoalHandler}
-                id={itemData.item.id}
-              />
-            );
-          }}
-          // * keyExtractor is used to identify the item to be rendered in the FlatList, in case of not providing the 'key' property in the data object
-          keyExtractor={(item) => {
-            return item.id;
-          }}
+    <>
+      <StatusBar />
+
+      <View style={styles.appContainer}>
+        <Button
+          title="Add New Goal"
+          color="#a065ec"
+          onPress={startAddGoalHandler}
         />
+        <GoalInput
+          visible={modalIsVisible}
+          onAddGoal={addGoalHandler}
+          onCancel={endAddGoalHandler}
+        />
+        <View style={styles.goalsOuterContainer}>
+          <FlatList
+            data={userGoals}
+            renderItem={(itemData) => {
+              return (
+                <GoalItem
+                  text={itemData.item.text}
+                  onDeleteGoal={deleteGoalHandler}
+                  id={itemData.item.id}
+                />
+              );
+            }}
+            // * keyExtractor is used to identify the item to be rendered in the FlatList, in case of not providing the 'key' property in the data object
+            keyExtractor={(item) => {
+              return item.id;
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
