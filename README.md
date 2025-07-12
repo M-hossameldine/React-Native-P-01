@@ -22,7 +22,7 @@ A simple React Native application for managing personal goals. Users can add and
 1. Clone the repository:
    ```bash
    git clone <your-repo-url>
-   cd p1-rn-course
+   cd goals-app
    ```
 2. Install dependencies:
    ```bash
